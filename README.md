@@ -1,5 +1,7 @@
 # Khmer Analysis Plugin for Elasticsearch
 
+<h3 align="center">***Currently the source code is in our private repo. Please contact us for early access!!!</h3>
+
 Khmerlang Analysis plugin integrates Khmer language analysis into Elasticsearch.
 
 The plugin provides `kh_analyzer` analyzer, `kh_tokenizer` tokenizer, `kh_synonym` khmer synonym, `kh_number` khmer number filter and `kh_stop` stop filter. The `kh_analyzer` is composed of the `kh_tokenizer` tokenizer, `correct_character`, `kh_number`, `stop` and `lowercase` filter.
