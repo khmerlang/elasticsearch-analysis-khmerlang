@@ -1,6 +1,7 @@
 # Khmer Analysis Plugin for Elasticsearch
 
 <h3 align="center">***Currently the source code is in our private repo. Please contact us for early access!!!</h3>
+<h3 align="center">Email: sreangrathanak@yahoo.com</h3>
 
 Khmerlang Analysis plugin integrates Khmer language analysis into Elasticsearch.
 
