@@ -1,0 +1,5 @@
+# Multiple synonym mapping entries are merged.
+ខ្ញុំ => ខ្ញុំ យើង
+ខ្ញុំ => អញ
+# is equivalent to
+ខ្ញុំ => ខ្ញុំ យើង, អញ

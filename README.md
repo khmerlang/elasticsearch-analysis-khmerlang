@@ -1,4 +1,4 @@
-# Khmer Analysis Plugin for Elasticsearch
+# Khmerlang Analysis Plugin for Elasticsearch
 
 <h3 align="center">***Currently the source code is in our private repo. Please contact us for early access!!!</h3>
 <h3 align="center">Email: admin@khmerlang.com</h3>
@@ -209,6 +209,56 @@ The above example produces the following terms:
 ### TODO
 - word segment using deeplearning
 - build synonym word list, group by category
+
+## Use Docker
+
+Make sure you have installed both Docker & docker-compose
+
+### Build the image with Docker Compose
+
+```sh
+# Copy, edit ES version and password for user elastic in file .env. Default password: changeme
+cp .env.sample .env
+docker compose build
+docker compose up
+```
+
+### Step 1: Build the plugin
+
+Clone the plugin’s source code:
+
+```sh
+git clone git@github.com:khmerlang/elasticsearch-analysis-khmerlang.git
+```
+
+Optionally, edit the `elasticsearch-analysis-khmerlang/pom.xml` to change the version of Elasticsearch (same as plugin version) you want to build the plugin with:
+
+```xml
+...
+<version>7.17.1</version>
+...
+ ```
+
+Build the plugin:
+```sh
+cd elasticsearch-analysis-vietnamese
+mvn package
+```
+
+### Step 2: Installation the plugin on Elasticsearch
+
+```sh
+bin/elasticsearch-plugin install file://target/releases/elasticsearch-analysis-khmerlang-7.17.1.zip
+```
+
+| Khmerlang Analysis Plugin  | Elasticsearch   |
+|----------------------------|-----------------|
+| master                     | 7.16 ~ 7.17.1   |
+| ...                        | ...           |
+
+
+### Issues:
+- Build fail due to Java version in correct. Change java version to 11: `export JAVA_HOME=$(/usr/libexec/java_home -v 11)`
 
 ### Refs:
 

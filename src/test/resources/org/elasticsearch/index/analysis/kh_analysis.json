@@ -1,0 +1,12 @@
+{
+  "index": {
+    "analysis": {
+      "analyzer": {
+        "my_analyzer": {
+          "type": "kh_analyzer",
+          "lowercase": true
+        }
+      }
+    }
+  }
+}

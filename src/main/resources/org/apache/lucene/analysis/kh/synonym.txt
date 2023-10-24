@@ -1,0 +1,5 @@
+# Multiple synonym mapping entries are merged.
+foo => foo bar
+foo => baz
+# is equivalent to
+foo => foo bar, baz
