@@ -232,13 +232,13 @@ Optionally, edit the `elasticsearch-analysis-khmerlang/pom.xml` to change the ve
 
 ```xml
 ...
-<version>7.17.1</version>
+<version>7.17.10</version>
 ...
  ```
 
 Build the plugin:
 ```sh
-cd elasticsearch-analysis-vietnamese
+cd elasticsearch-analysis-khmerlang
 mvn package
 ```
 
@@ -251,6 +251,8 @@ bin/elasticsearch-plugin install file://target/releases/elasticsearch-analysis-k
 | Khmerlang Analysis Plugin  | Elasticsearch   |
 |----------------------------|-----------------|
 | master                     | 7.16 ~ 7.17.1   |
+| develop                    | 7.17.5-7.17.10  |
+| 7.17.5-7.17.10             | 7.17.5-7.17.10  |
 | 7.16.1                     | 7.16 ~ 7.17.1   |
 | ...                        | ...           |
 

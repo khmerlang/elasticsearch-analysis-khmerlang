@@ -11,7 +11,7 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.analysis.*;
 import org.elasticsearch.plugin.analysis.kh.AnalysisKhmerPlugin;
-import org.elasticsearch.test.ESTestCase;
+import org.elasticsearch.test.ESSingleNodeTestCase;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -20,7 +20,7 @@ import static org.apache.lucene.analysis.BaseTokenStreamTestCase.assertTokenStre
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
 
-public class KhmerlangAnalysisTests extends ESTestCase {
+public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
     public void testKhmerlangAnalysis() throws IOException {
         TestAnalysis analysis = createTestAnalysis(Settings.EMPTY);
         assertNotNull(analysis);
