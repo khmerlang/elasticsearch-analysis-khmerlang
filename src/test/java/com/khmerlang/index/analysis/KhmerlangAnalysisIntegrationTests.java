@@ -9,6 +9,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.plugin.analysis.kh.AnalysisKhmerPlugin;
 import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.plugins.PluginInfo;
+import org.elasticsearch.test.ESIntegTestCase.ClusterScope;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.xcontent.XContentBuilder;
 
@@ -17,10 +18,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 
+import static org.elasticsearch.test.ESIntegTestCase.Scope.TEST;
 import static org.elasticsearch.xcontent.XContentFactory.jsonBuilder;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
+@ClusterScope(supportsDedicatedMasters=false, numDataNodes=1, numClientNodes=0)
 public class KhmerlangAnalysisIntegrationTests extends ESIntegTestCase {
     @Override
     protected Collection<Class<? extends Plugin>> nodePlugins() {
@@ -69,12 +72,12 @@ public class KhmerlangAnalysisIntegrationTests extends ESIntegTestCase {
                 .endObject()
                 .endObject()
                 .endObject();
-        client().admin().indices().preparePutMapping("test").setType("_doc").setSource(mapping).get();
+        client().admin().indices().preparePutMapping("test").setSource(mapping).get();
         final XContentBuilder source = jsonBuilder()
                 .startObject()
                 .field("foo", "ខ្ញុំស្រលាញ់កម្ពុជា។")
                 .endObject();
-        index("test", "_doc", "1", source);
+        index("test", "1", source);
         refresh();
         SearchResponse response = client().prepareSearch("test").
                 setQuery(

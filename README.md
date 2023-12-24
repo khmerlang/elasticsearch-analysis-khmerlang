@@ -226,13 +226,14 @@ Clone the plugin’s source code:
 
 ```sh
 git clone git@github.com:khmerlang/elasticsearch-analysis-khmerlang.git
+git checkout 8.0.0
 ```
 
 Optionally, edit the `elasticsearch-analysis-khmerlang/pom.xml` to change the version of Elasticsearch (same as plugin version) you want to build the plugin with:
 
 ```xml
 ...
-<version>7.17.1</version>
+<version>8.0.0</version>
 ...
  ```
 
@@ -245,14 +246,15 @@ mvn package
 ### Step 2: Installation the plugin on Elasticsearch
 
 ```sh
-bin/elasticsearch-plugin install file://target/releases/elasticsearch-analysis-khmerlang-7.17.1.zip
+bin/elasticsearch-plugin install file://target/releases/elasticsearch-analysis-khmerlang-8.0.0.zip
 ```
 
 | Khmerlang Analysis Plugin  | Elasticsearch   |
 |----------------------------|-----------------|
 | master                     | 7.16 ~ 7.17.1   |
+| 8.0.0                      | 8.0.0 ~ 8.0.x   |
 | 7.16.1                     | 7.16 ~ 7.17.1   |
-| ...                        | ...           |
+| ...                        | ...             |
 
 
 ### Issues:

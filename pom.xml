@@ -6,7 +6,7 @@
 
     <groupId>org.elasticsearch</groupId>
     <artifactId>elasticsearch-analysis-khmerlang</artifactId>
-    <version>7.17.1</version>
+    <version>8.0.0</version>
     <packaging>jar</packaging>
     <name>elasticsearch-analysis-khmerlang</name>
     <description>Elasticsearch Khmer Analysis Plugin</description>
