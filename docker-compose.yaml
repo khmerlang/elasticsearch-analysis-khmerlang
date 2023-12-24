@@ -1,4 +1,5 @@
 version: '3.4'
+
 services:
   elasticsearch:
     build:
@@ -28,6 +29,8 @@ services:
     ports:
       - 5601:5601
     environment:
+      ELASTICSEARCH_USERNAME: "elastic"
+      ELASTICSEARCH_PASSWORD: ${ELASTIC_PASSWORD}
       ELASTICSEARCH_URL: http://elasticsearch:9200
       ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
     depends_on:

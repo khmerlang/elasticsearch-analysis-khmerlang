@@ -8,8 +8,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.plugin.analysis.kh.AnalysisKhmerPlugin;
 import org.elasticsearch.plugins.Plugin;
-import org.elasticsearch.plugins.PluginInfo;
-import org.elasticsearch.test.ESIntegTestCase.ClusterScope;
+import org.elasticsearch.plugins.PluginDescriptor;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.xcontent.XContentBuilder;
 
@@ -23,7 +22,7 @@ import static org.elasticsearch.xcontent.XContentFactory.jsonBuilder;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-@ClusterScope(supportsDedicatedMasters=false, numDataNodes=1, numClientNodes=0)
+@ESIntegTestCase.ClusterScope(numDataNodes = 1, numClientNodes = 0)
 public class KhmerlangAnalysisIntegrationTests extends ESIntegTestCase {
     @Override
     protected Collection<Class<? extends Plugin>> nodePlugins() {
@@ -34,7 +33,7 @@ public class KhmerlangAnalysisIntegrationTests extends ESIntegTestCase {
         NodesInfoResponse response = client().admin().cluster().prepareNodesInfo().get();
         for (NodeInfo nodeInfo : response.getNodes()) {
             boolean pluginFound = false;
-            for (PluginInfo pluginInfo : nodeInfo.getInfo(PluginsAndModules.class).getPluginInfos()) {
+            for (PluginDescriptor pluginInfo : nodeInfo.getInfo(PluginsAndModules.class).getPluginInfos()) {
                 if (pluginInfo.getName().equals(AnalysisKhmerPlugin.class.getName())) {
                     pluginFound = true;
                     break;
