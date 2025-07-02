@@ -256,8 +256,8 @@ bin/elasticsearch-plugin install file://target/releases/elasticsearch-analysis-k
 | master                     | 7.16 ~ 7.17.1   |
 |                            | 8.0.0 ~ 8.0.x   |
 |                            | 8.13.4          |
-|                            | 8.11.3          |
-| develop                    | 8.5.3           |
+| develop                    | 8.11.3          |
+| 8.5.3                      | 8.5.3           |
 | 8.2.3                      | 8.2.3           |
 | 8.0.0                      | 8.0.0 ~ 8.0.x   |
 | 7.17.5-7.17.10             | 7.17.5-7.17.10  |
