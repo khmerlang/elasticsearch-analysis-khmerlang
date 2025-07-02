@@ -8,10 +8,12 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
 import org.elasticsearch.index.IndexSettings;
 
-public class KhmerlangStopTokenFilterFactory extends AbstractTokenFilterFactory  {
+public class KhmerlangStopTokenFilterFactory extends AbstractTokenFilterFactory {
     private final CharArraySet stopWords;
-    public KhmerlangStopTokenFilterFactory(IndexSettings indexSettings, Environment env, String name, Settings settings) {
-        super(indexSettings, name, settings);
+
+    public KhmerlangStopTokenFilterFactory(IndexSettings indexSettings, Environment env, String name,
+            Settings settings) {
+        super(name, settings);
         stopWords = Analysis.parseStopWords(env, settings, KhmerlangAnalyzer.getDefaultStopSet());
     }
 

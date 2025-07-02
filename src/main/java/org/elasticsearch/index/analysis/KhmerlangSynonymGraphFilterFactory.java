@@ -1,6 +1,5 @@
 package org.elasticsearch.index.analysis;
 
-
 import com.google.common.base.Charsets;
 import com.khmerlang.utils.FileResourcesUtils;
 import org.apache.lucene.analysis.TokenStream;
@@ -24,8 +23,9 @@ public class KhmerlangSynonymGraphFilterFactory extends AbstractTokenFilterFacto
     protected final Environment environment;
     private KhmerlangAnalyzer analyzer;
 
-    public KhmerlangSynonymGraphFilterFactory(IndexSettings indexSettings, Environment environment, String name, Settings settings) {
-        super(indexSettings, name, settings);
+    public KhmerlangSynonymGraphFilterFactory(IndexSettings indexSettings, Environment environment, String name,
+            Settings settings) {
+        super(name, settings);
         this.environment = environment;
         this.location = settings.get("synonyms_path", KhmerlangConfig.DEFAULT_SYNONYM_PATH);
         this.expand = settings.getAsBoolean("expand", true);
@@ -33,7 +33,8 @@ public class KhmerlangSynonymGraphFilterFactory extends AbstractTokenFilterFacto
         analyzer = new KhmerlangAnalyzer(new KhmerlangConfig(settings));
 
         try {
-            Reader rulesReader = new InputStreamReader(FileResourcesUtils.getFileFromResourceAsStream(location), Charsets.UTF_8);
+            Reader rulesReader = new InputStreamReader(FileResourcesUtils.getFileFromResourceAsStream(location),
+                    Charsets.UTF_8);
             SynonymMap.Builder parser = null;
             parser = new SolrSynonymParser(true, expand, analyzer);
             ((SolrSynonymParser) parser).parse(rulesReader);
@@ -45,7 +46,8 @@ public class KhmerlangSynonymGraphFilterFactory extends AbstractTokenFilterFacto
 
     @Override
     public TokenStream create(TokenStream tokenStream) {
-//        throw new IllegalStateException("Call getChainAwareTokenFilterFactory to specialize this factory for an analysis chain first");
+        // throw new IllegalStateException("Call getChainAwareTokenFilterFactory to
+        // specialize this factory for an analysis chain first");
         return synonymMap.fst == null ? tokenStream : new SynonymGraphFilter(tokenStream, synonymMap, true);
     }
 

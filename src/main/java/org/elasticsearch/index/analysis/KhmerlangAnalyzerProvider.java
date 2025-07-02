@@ -11,7 +11,7 @@ public class KhmerlangAnalyzerProvider extends AbstractIndexAnalyzerProvider<Khm
     private final KhmerlangAnalyzer analyzer;
 
     public KhmerlangAnalyzerProvider(IndexSettings indexSettings, Environment env, String name, Settings settings) {
-        super(indexSettings, name, settings);
+        super(name, settings);
         final CharArraySet stopWords = Analysis.parseStopWords(env, settings, KhmerlangAnalyzer.getDefaultStopSet());
         analyzer = new KhmerlangAnalyzer(new KhmerlangConfig(settings), stopWords);
     }

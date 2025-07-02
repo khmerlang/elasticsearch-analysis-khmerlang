@@ -9,11 +9,12 @@ import org.elasticsearch.index.IndexSettings;
 
 public class KhmerlangNumberFilterFactory extends AbstractTokenFilterFactory {
     private final KhmerlangConfig config;
-    public KhmerlangNumberFilterFactory(IndexSettings indexSettings, Environment environment, String name, Settings settings) {
-        super(indexSettings, name, settings);
+
+    public KhmerlangNumberFilterFactory(IndexSettings indexSettings, Environment environment, String name,
+            Settings settings) {
+        super(name, settings);
         config = new KhmerlangConfig(settings);
     }
-
 
     @Override
     public TokenStream create(TokenStream tokenStream) {
