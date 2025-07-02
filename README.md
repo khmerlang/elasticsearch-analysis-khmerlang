@@ -240,6 +240,8 @@ Optionally, edit the `elasticsearch-analysis-khmerlang/pom.xml` to change the ve
 Build the plugin:
 ```sh
 cd elasticsearch-analysis-khmerlang
+mvn clean install
+mvn clean install -Dgpg.skip=true -DskipTests=true
 mvn package
 ```
 
@@ -252,7 +254,11 @@ bin/elasticsearch-plugin install file://target/releases/elasticsearch-analysis-k
 | Khmerlang Analysis Plugin  | Elasticsearch   |
 |----------------------------|-----------------|
 | master                     | 7.16 ~ 7.17.1   |
-| develop                    | 8.0.0 ~ 8.0.x   |
+|                            | 8.0.0 ~ 8.0.x   |
+|                            | 8.13.4          |
+|                            | 8.11.3          |
+|                            | 8.5.3           |
+| develop                    | 8.2.3           |
 | 8.0.0                      | 8.0.0 ~ 8.0.x   |
 | 7.17.5-7.17.10             | 7.17.5-7.17.10  |
 | 7.16.1                     | 7.16 ~ 7.17.1   |

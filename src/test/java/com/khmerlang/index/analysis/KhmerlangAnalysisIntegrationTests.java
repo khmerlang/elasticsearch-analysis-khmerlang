@@ -8,7 +8,6 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.plugin.analysis.kh.AnalysisKhmerPlugin;
 import org.elasticsearch.plugins.Plugin;
-import org.elasticsearch.plugins.PluginInfo;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.xcontent.XContentBuilder;
 
@@ -33,11 +32,11 @@ public class KhmerlangAnalysisIntegrationTests extends ESIntegTestCase {
         NodesInfoResponse response = client().admin().cluster().prepareNodesInfo().get();
         for (NodeInfo nodeInfo : response.getNodes()) {
             boolean pluginFound = false;
-            for (PluginInfo pluginInfo : nodeInfo.getInfo(PluginsAndModules.class).getPluginInfos()) {
-                if (pluginInfo.getClassname().equals(AnalysisKhmerPlugin.class.getName())) {
-                    pluginFound = true;
-                    break;
-                }
+            // In ES 8.2.3, PluginInfo is not available. Check plugin by name string.
+            String pluginsString = nodeInfo.getInfo(PluginsAndModules.class).getPluginInfos().toString();
+            if (pluginsString.contains("analysis-khmerlang")
+                    || pluginsString.contains(AnalysisKhmerPlugin.class.getName())) {
+                pluginFound = true;
             }
             assertThat(pluginFound, is(true));
         }

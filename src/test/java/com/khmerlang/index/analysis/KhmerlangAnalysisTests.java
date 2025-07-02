@@ -16,7 +16,8 @@ import org.elasticsearch.test.ESSingleNodeTestCase;
 import java.io.IOException;
 import java.io.StringReader;
 
-import static org.apache.lucene.analysis.BaseTokenStreamTestCase.assertTokenStreamContents;
+import static org.apache.lucene.tests.analysis.BaseTokenStreamTestCase.assertTokenStreamContents;
+
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.Assert.assertNotNull;
@@ -44,7 +45,7 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
         TokenStream ts = analyzer.analyzer().tokenStream("test", "ខ្ញុំស្រលាញ់កម្ពុជា។");
         CharTermAttribute term = ts.addAttribute(CharTermAttribute.class);
         ts.reset();
-        for (String expected : new String[]{"ខ្ញុំ", "ស្រលាញ់", "កម្ពុជា"}) {
+        for (String expected : new String[] { "ខ្ញុំ", "ស្រលាញ់", "កម្ពុជា" }) {
             assertThat(ts.incrementToken(), equalTo(true));
             assertThat(term.toString(), equalTo(expected));
         }
@@ -59,7 +60,7 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
         TokenStream ts = analyzer.analyzer().tokenStream("test", "ស្រ្តី ប្តី");
         CharTermAttribute term = ts.addAttribute(CharTermAttribute.class);
         ts.reset();
-        for (String expected : new String[]{"ស្ត្រី", "ប្ដី"}) {
+        for (String expected : new String[] { "ស្ត្រី", "ប្ដី" }) {
             assertThat(ts.incrementToken(), equalTo(true));
             assertThat(term.toString(), equalTo(expected));
         }
@@ -86,10 +87,12 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
         TestAnalysis analysis = createTestAnalysis(settings);
         NamedAnalyzer analyzer = analysis.indexAnalyzers.get("kh_analyzer");
         assertNotNull(analyzer);
-        TokenStream ts = analyzer.analyzer().tokenStream("test", "១២៣៤៥៦៧អ្នកចេះ​និយាយភាសាខ្មែរទេ? 1234567អ្នកចេះនិយាយភាសាខ្មែរទេ?");
+        TokenStream ts = analyzer.analyzer().tokenStream("test",
+                "១២៣៤៥៦៧អ្នកចេះ​និយាយភាសាខ្មែរទេ? 1234567អ្នកចេះនិយាយភាសាខ្មែរទេ?");
         CharTermAttribute term = ts.addAttribute(CharTermAttribute.class);
         ts.reset();
-        for (String expected : new String[]{"១២៣៤៥៦៧", "អ្នកចេះ", "និយាយ", "ភាសាខ្មែរ", "ទេ", "1234567", "អ្នកចេះ", "និយាយ", "ភាសាខ្មែរ", "ទេ"}) {
+        for (String expected : new String[] { "១២៣៤៥៦៧", "អ្នកចេះ", "និយាយ", "ភាសាខ្មែរ", "ទេ", "1234567", "អ្នកចេះ",
+                "និយាយ", "ភាសាខ្មែរ", "ទេ" }) {
             assertThat(ts.incrementToken(), equalTo(true));
             assertThat(term.toString(), equalTo(expected));
         }
@@ -105,11 +108,13 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
         TestAnalysis analysis = createTestAnalysis(settings);
         NamedAnalyzer analyzer = analysis.indexAnalyzers.get("kh_analyzer");
         assertNotNull(analyzer);
-        TokenStream ts = analyzer.analyzer().tokenStream("test", "១២៣៤៥៦៧អ្នកចេះ​និយាយភាសាខ្មែរទេ? 1234567អ្នកចេះនិយាយភាសាខ្មែរទេ?");
+        TokenStream ts = analyzer.analyzer().tokenStream("test",
+                "១២៣៤៥៦៧អ្នកចេះ​និយាយភាសាខ្មែរទេ? 1234567អ្នកចេះនិយាយភាសាខ្មែរទេ?");
         CharTermAttribute term = ts.addAttribute(CharTermAttribute.class);
         ts.reset();
-        //"ទេ" is removed since it is in stopwords list
-        for (String expected : new String[]{"១២៣៤៥៦៧", "អ្នកចេះ", "និយាយ", "ភាសាខ្មែរ", "1234567", "អ្នកចេះ", "និយាយ", "ភាសាខ្មែរ"}) {
+        // "ទេ" is removed since it is in stopwords list
+        for (String expected : new String[] { "១២៣៤៥៦៧", "អ្នកចេះ", "និយាយ", "ភាសាខ្មែរ", "1234567", "អ្នកចេះ", "និយាយ",
+                "ភាសាខ្មែរ" }) {
             assertThat(ts.incrementToken(), equalTo(true));
             assertThat(term.toString(), equalTo(expected));
         }
@@ -125,12 +130,14 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
         TestAnalysis analysis = createTestAnalysis(settings);
         NamedAnalyzer analyzer = analysis.indexAnalyzers.get("kh_analyzer");
         assertNotNull(analyzer);
-        TokenStream ts = analyzer.analyzer().tokenStream("test", "១២៣៤៥.៦៧អ្នកចេះ​និយាយភាសាខ្មែរទេ? 12345.67អ្នកចេះនិយាយភាសាខ្មែរទេ?");
+        TokenStream ts = analyzer.analyzer().tokenStream("test",
+                "១២៣៤៥.៦៧អ្នកចេះ​និយាយភាសាខ្មែរទេ? 12345.67អ្នកចេះនិយាយភាសាខ្មែរទេ?");
         CharTermAttribute term = ts.addAttribute(CharTermAttribute.class);
         ts.reset();
-        //"ទេ" is removed since it is in stopwords list
-        for (String expected : new String[]{"12345.67", "អ្នកចេះ", "និយាយ", "ភាសាខ្មែរ", "12345.67", "អ្នកចេះ", "និយាយ", "ភាសាខ្មែរ"}) {
-//            assertThat(ts.incrementToken(), equalTo(true));
+        // "ទេ" is removed since it is in stopwords list
+        for (String expected : new String[] { "12345.67", "អ្នកចេះ", "និយាយ", "ភាសាខ្មែរ", "12345.67", "អ្នកចេះ",
+                "និយាយ", "ភាសាខ្មែរ" }) {
+            // assertThat(ts.incrementToken(), equalTo(true));
             ts.incrementToken();
             assertThat(term.toString(), equalTo(expected));
         }
@@ -146,7 +153,7 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
         assertNotNull(tokenizer);
 
         tokenizer.setReader(new StringReader("ខ្ញុំស្រលាញ់កម្ពុជា។"));
-        assertTokenStreamContents(tokenizer, new String[]{"ខ្ញុំ", "ស្រលាញ់", "កម្ពុជា"});
+        assertTokenStreamContents(tokenizer, new String[] { "ខ្ញុំ", "ស្រលាញ់", "កម្ពុជា" });
     }
 
     public void testKhmerAnalyzerWithCustomTokenizerWithSynonym() throws IOException {
@@ -161,7 +168,7 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
         TokenStream ts = analyzer.analyzer().tokenStream("test", "ខ្ញុំ");
         CharTermAttribute term = ts.addAttribute(CharTermAttribute.class);
         ts.reset();
-        for (String expected : new String[]{"ខ្ញុំ", "អញ", "យើង"}) {
+        for (String expected : new String[] { "ខ្ញុំ", "អញ", "យើង" }) {
             ts.incrementToken();
             assertThat(term.toString(), equalTo(expected));
         }
