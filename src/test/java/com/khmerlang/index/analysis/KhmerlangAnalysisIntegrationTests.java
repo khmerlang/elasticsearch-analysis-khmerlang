@@ -10,6 +10,7 @@ import org.elasticsearch.plugin.analysis.kh.AnalysisKhmerPlugin;
 import org.elasticsearch.plugins.Plugin;
 import org.elasticsearch.test.ESIntegTestCase;
 import org.elasticsearch.xcontent.XContentBuilder;
+import org.junit.After;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -77,8 +78,13 @@ public class KhmerlangAnalysisIntegrationTests extends ESIntegTestCase {
                 .endObject();
         index("test", "1", source);
         refresh();
-        SearchResponse response = client().prepareSearch("test").setQuery(
-                QueryBuilders.matchQuery("foo", "ខ្ញុំស្រលាញ់")).execute().actionGet();
+        SearchResponse response = client().prepareSearch("test")
+                .setRequestCache(false) // <-- important
+                .setQuery(QueryBuilders.matchQuery("foo", "ខ្ញុំស្រលាញ់"))
+                .get();
         assertThat(response.getHits().getTotalHits().toString(), is("1 hits"));
+        // wait for garbage collection to finalize any references
+        System.gc();
+        Thread.sleep(500);
     }
 }

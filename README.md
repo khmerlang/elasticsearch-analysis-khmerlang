@@ -254,9 +254,10 @@ bin/elasticsearch-plugin install file://target/releases/elasticsearch-analysis-k
 | Khmerlang Analysis Plugin  | Elasticsearch   |
 |----------------------------|-----------------|
 | master                     | 7.16 ~ 7.17.1   |
-|                            | 8.0.0 ~ 8.0.x   |
-|                            | 8.13.4          |
-| develop                    | 8.11.3          |
+|                            | 9.0.3           |
+|                            | 8.18.3          |
+| develop                    | 8.13.4          |
+| 8.11.3                     | 8.11.3          |
 | 8.5.3                      | 8.5.3           |
 | 8.2.3                      | 8.2.3           |
 | 8.0.0                      | 8.0.0 ~ 8.0.x   |

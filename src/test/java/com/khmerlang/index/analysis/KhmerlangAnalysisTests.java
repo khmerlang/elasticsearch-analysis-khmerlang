@@ -50,6 +50,7 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
             assertThat(term.toString(), equalTo(expected));
         }
         assertThat(ts.incrementToken(), equalTo(false));
+        ts.end();
     }
 
     public void testKhmerlangAnalyzerCorrectCharacter() throws IOException {
@@ -65,6 +66,7 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
             assertThat(term.toString(), equalTo(expected));
         }
         assertThat(ts.incrementToken(), equalTo(false));
+        ts.end();
     }
 
     public void testCustomKhmerAnalyzer() throws IOException {
@@ -97,6 +99,7 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
             assertThat(term.toString(), equalTo(expected));
         }
         assertThat(ts.incrementToken(), equalTo(false));
+        ts.end();
     }
 
     public void testKhmerAnalyzerWithCustomTokenizerWithStopWords() throws IOException {
@@ -119,6 +122,7 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
             assertThat(term.toString(), equalTo(expected));
         }
         assertThat(ts.incrementToken(), equalTo(false));
+        ts.end();
     }
 
     public void testKhmerAnalyzerWithCustomTokenizerKhmerNumber() throws IOException {
@@ -142,6 +146,7 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
             assertThat(term.toString(), equalTo(expected));
         }
         assertThat(ts.incrementToken(), equalTo(false));
+        ts.end();
     }
 
     public void testKhmerlangTokenizer() throws IOException {
@@ -172,6 +177,7 @@ public class KhmerlangAnalysisTests extends ESSingleNodeTestCase {
             ts.incrementToken();
             assertThat(term.toString(), equalTo(expected));
         }
+        ts.end();
     }
 
     public TestAnalysis createTestAnalysis(Settings analysisSettings) throws IOException {
